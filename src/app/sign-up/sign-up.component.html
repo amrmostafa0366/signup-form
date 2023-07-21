@@ -1,8 +1,12 @@
 <form [formGroup]="form">
     <div>
-        <label>Name</label>
+        <!-- <label>Name</label>
         <br>
-        <input formControlName="name" type="text">
+        <input formControlName="name" type="text"> -->
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input formControlName="name" matInput type="text">
+        </mat-form-field>
         <div *ngIf="name?.touched && name?.invalid" class="alert alert-danger">
             <div *ngIf="name?.errors?.['required']">Name is required</div>
             <div *ngIf="name?.errors?.['minlength']">Name should be at least 3 characters</div>
@@ -11,18 +15,26 @@
         </div>
     </div>
     <div>
-        <label>Email</label>
+        <!-- <label>Email</label>
         <br>
-        <input formControlName="email" type="text">
+        <input formControlName="email" type="text"> -->
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput type="text">
+        </mat-form-field>
         <div *ngIf="email?.touched && email?.invalid" class="alert alert-danger">
             <div *ngIf="email?.errors?.['required']">Email is required</div>
             <div *ngIf="email?.errors?.['email']">Invalid email</div>
         </div>
     </div>
     <div>
-        <label>Password</label>
+        <!-- <label>Password</label>
         <br>
-        <input formControlName="password" type="text">
+        <input formControlName="password" type="text"> -->
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input formControlName="password" matInput type="text">
+        </mat-form-field>
         <div *ngIf="password?.touched && password?.invalid" class="alert alert-danger">
             <div *ngIf="password?.errors?.['required']">Password is required</div>
             <div *ngIf="password?.errors?.['minlength']">Password should be at least 8 characters</div>
@@ -33,55 +45,65 @@
         </div>
     </div>
     <div>
-        <label>Confirm Password</label>
+        <!-- <label>Confirm Password</label>
         <br>
-        <input formControlName="confirmPw" type="text">
+        <input formControlName="confirmPw" type="text"> -->
+        <mat-form-field>
+            <mat-label>Confirm Password</mat-label>
+            <input formControlName="confirmPw" matInput type="text">
+        </mat-form-field>
         <div *ngIf="confirmPw?.touched && confirmPw?.invalid" class="alert alert-danger">
             <div *ngIf="confirmPw?.errors?.['required']">Password is required</div>
             <div *ngIf="confirmPw?.errors?.['matchPassword']">Passwords didn't match</div>
         </div>
     </div>
     <div>
-        <label>Phone number</label>
+        <!-- <label>Phone number</label>
         <br>
-        <input type="text">
+        <input type="text"> -->
+        <mat-form-field>
+            <mat-label>Phone number</mat-label>
+            <input formControlName="phone" matInput type="text">
+        </mat-form-field>
     </div>
     <div>
-        <label for="">Country</label>
+        <!-- <label for="">Country</label>
         <br>
         <select formControlName="country">
             <option value=""></option>
             <option *ngFor="let country of countryList" [value]="country">{{country}}</option>
-        </select>
+        </select> -->
+        <mat-form-field>
+            <mat-label>Country</mat-label>
+            <mat-select formControlName="country">
+                <mat-option *ngFor="let country of countryList" [value]="country">{{country}}</mat-option>
+            </mat-select>
+        </mat-form-field>
     </div>
     <div>
-        <label for="">City</label>
+        <!-- <label for="">City</label>
         <br>
         <select formControlName="city" id="">
             <option value=""></option>
             <option *ngFor="let city of changeCountry()" [value]="city">{{city}}</option>
-        </select>
+        </select> -->
+        <mat-form-field>
+            <mat-label>City</mat-label>
+            <mat-select formControlName="city">
+                <mat-option *ngFor="let city of changeCountry()" [value]="city">{{city}}</mat-option>
+            </mat-select>
+        </mat-form-field>
         <div *ngIf="city?.touched && city?.invalid " class="alert alert-danger">
             <div *ngIf="city?.errors?.['required']">City is required</div>
         </div>
     </div>
     <div>
-        <input formControlName="gender" type="radio" name="gender" value="male" (change)="changeGender()">
-        <label>Male</label>
-        <br>
-        <input formControlName="gender" type="radio" name="gender" value="female" (change)="changeGender()">
-        <label>Female</label>
-        <div *ngIf="gender?.touched && gender?.invalid" class="alert alert-danger">
-            <div *ngIf="gender?.errors?.['required']">Gender is required</div>
-        </div>
-    </div>
-    <div>
-        <br>
-        <label>Birthdate</label>
-        <br>
-        <input formControlName="birthdate" matInput [matDatepicker]="picker">
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-form-field>
+            <mat-label>Birthdate</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
         <div *ngIf="birthdate?.touched && birthdate?.invalid" class="alert alert-danger">
             <div *ngIf="birthdate?.errors?.['required']">Birthdate is required</div>
             <div *ngIf="birthdate?.errors?.['notUnderAge']">You should be +18 to submit this form</div>
@@ -90,21 +112,53 @@
         </div>
     </div>
     <div>
-        <label for="">Military status</label>
+        <!-- <input formControlName="gender" type="radio" name="gender" value="male" (change)="changeGender()">
+        <label>Male</label>
+        <br>
+        <input formControlName="gender" type="radio" name="gender" value="female" (change)="changeGender()">
+        <label>Female</label> -->
+        <mat-radio-group formControlName="gender" (change)="changeGender()" aria-label="Select an option">
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+        </mat-radio-group>
+
+        <div *ngIf="gender?.touched && gender?.invalid" class="alert alert-danger">
+            <div *ngIf="gender?.errors?.['required']">Gender is required</div>
+        </div>
+    </div>
+
+    <div>
+        <!-- <label for="">Military status</label>
         <br>
         <select formControlName="militarySt">
             <option value=""></option>
             <option value="Completed">Completed</option>
             <option value="Exempted">Exempted</option>
             <option value="postponed">postponed</option>
-        </select>
+        </select> -->
+        <mat-form-field>
+            <mat-label>Military status</mat-label>
+            <mat-select formControlName="militarySt">
+                <mat-option value=""></mat-option>
+                <mat-option value="Completed">Completed</mat-option>
+                <mat-option value="Exempted">Exempted</mat-option>
+                <mat-option value="postponed">postponed</mat-option>
+            </mat-select>
+        </mat-form-field>
+
         <div *ngIf="militarySt?.touched && militarySt?.invalid" class="alert alert-danger">
             <div *ngIf="militarySt?.errors?.['required']">Military stauts is required</div>
         </div>
     </div>
     <br>
-    <button mat-button (click)="openDialog()" [disabled]="form.invalid">Submit</button>
-    <button (click)="reset()">Reset</button>
+    <!-- <button (click)="openDialog()" [disabled]="form.invalid">Submit</button> -->
+    <!-- <button (click)="reset()">Reset</button> -->
+    <button mat-raised-button color="primary" (click)="openDialog()" [disabled]="form.invalid">Submit</button>
+    <button mat-raised-button color="warn" (click)="reset()">Reset</button>
+
     <br>
     <!-- {{form.value|json}} -->
 </form>
+
+
+
