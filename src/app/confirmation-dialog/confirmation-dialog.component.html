@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Confiramation</h2>
+<mat-dialog-content class="mat-typography">
+    <p>By checking "Yes, I Agree" you acknowledge that the provided information is accurate and complete.</p>
+    <p>You also agree to abide by our <a href="/terms-of-service" target="_blank">Terms of Service</a> and <a
+            href="/privacy-policy" target="_blank">Privacy Policy</a>.</p>
+    <mat-checkbox #agree>Yes, I Agree</mat-checkbox>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button (click)="submit()" [disabled]="!agree.checked">Confirm</button>
+    <button (click)="cancel()">Cancel</button>
+</mat-dialog-actions>

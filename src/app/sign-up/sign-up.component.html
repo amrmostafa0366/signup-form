@@ -1,0 +1,110 @@
+<form [formGroup]="form">
+    <div>
+        <label>Name</label>
+        <br>
+        <input formControlName="name" type="text">
+        <div *ngIf="name?.touched && name?.invalid" class="alert alert-danger">
+            <div *ngIf="name?.errors?.['required']">Name is required</div>
+            <div *ngIf="name?.errors?.['minlength']">Name should be at least 3 characters</div>
+            <div *ngIf="name?.errors?.['maxlength']">Name should be at most 10 characters</div>
+            <div *ngIf="name?.errors?.['onlyAlphabet']">Name should be only alphabet</div>
+        </div>
+    </div>
+    <div>
+        <label>Email</label>
+        <br>
+        <input formControlName="email" type="text">
+        <div *ngIf="email?.touched && email?.invalid" class="alert alert-danger">
+            <div *ngIf="email?.errors?.['required']">Email is required</div>
+            <div *ngIf="email?.errors?.['email']">Invalid email</div>
+        </div>
+    </div>
+    <div>
+        <label>Password</label>
+        <br>
+        <input formControlName="password" type="text">
+        <div *ngIf="password?.touched && password?.invalid" class="alert alert-danger">
+            <div *ngIf="password?.errors?.['required']">Password is required</div>
+            <div *ngIf="password?.errors?.['minlength']">Password should be at least 8 characters</div>
+            <div *ngIf="password?.errors?.['maxlength']">Password should be at most 15 characters</div>
+            <div *ngIf="password?.errors?.['containUpperCase']">Password should contains upper case</div>
+            <div *ngIf="password?.errors?.['containSpecialCharacter']">Password should contains special character</div>
+            <div *ngIf="password?.errors?.['containNumber']">Password should contains numbers</div>
+        </div>
+    </div>
+    <div>
+        <label>Confirm Password</label>
+        <br>
+        <input formControlName="confirmPw" type="text">
+        <div *ngIf="confirmPw?.touched && confirmPw?.invalid" class="alert alert-danger">
+            <div *ngIf="confirmPw?.errors?.['required']">Password is required</div>
+            <div *ngIf="confirmPw?.errors?.['matchPassword']">Passwords didn't match</div>
+        </div>
+    </div>
+    <div>
+        <label>Phone number</label>
+        <br>
+        <input type="text">
+    </div>
+    <div>
+        <label for="">Country</label>
+        <br>
+        <select formControlName="country">
+            <option value=""></option>
+            <option *ngFor="let country of countryList" [value]="country">{{country}}</option>
+        </select>
+    </div>
+    <div>
+        <label for="">City</label>
+        <br>
+        <select formControlName="city" id="">
+            <option value=""></option>
+            <option *ngFor="let city of changeCountry()" [value]="city">{{city}}</option>
+        </select>
+        <div *ngIf="city?.touched && city?.invalid " class="alert alert-danger">
+            <div *ngIf="city?.errors?.['required']">City is required</div>
+        </div>
+    </div>
+    <div>
+        <input formControlName="gender" type="radio" name="gender" value="male" (change)="changeGender()">
+        <label>Male</label>
+        <br>
+        <input formControlName="gender" type="radio" name="gender" value="female" (change)="changeGender()">
+        <label>Female</label>
+        <div *ngIf="gender?.touched && gender?.invalid" class="alert alert-danger">
+            <div *ngIf="gender?.errors?.['required']">Gender is required</div>
+        </div>
+    </div>
+    <div>
+        <br>
+        <label>Birthdate</label>
+        <br>
+        <input formControlName="birthdate" matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <div *ngIf="birthdate?.touched && birthdate?.invalid" class="alert alert-danger">
+            <div *ngIf="birthdate?.errors?.['required']">Birthdate is required</div>
+            <div *ngIf="birthdate?.errors?.['notUnderAge']">You should be +18 to submit this form</div>
+            <div *ngIf="birthdate?.errors?.['notOverage']">You should be under 60 to submit this form</div>
+            <div *ngIf="birthdate?.errors?.['notOverDate']">Haha you didn't born yet !?</div>
+        </div>
+    </div>
+    <div>
+        <label for="">Military status</label>
+        <br>
+        <select formControlName="militarySt">
+            <option value=""></option>
+            <option value="Completed">Completed</option>
+            <option value="Exempted">Exempted</option>
+            <option value="postponed">postponed</option>
+        </select>
+        <div *ngIf="militarySt?.touched && militarySt?.invalid" class="alert alert-danger">
+            <div *ngIf="militarySt?.errors?.['required']">Military stauts is required</div>
+        </div>
+    </div>
+    <br>
+    <button mat-button (click)="openDialog()" [disabled]="form.invalid">Submit</button>
+    <button (click)="reset()">Reset</button>
+    <br>
+    <!-- {{form.value|json}} -->
+</form>
