@@ -5,6 +5,7 @@ import { PasswordValidators } from '../validators/password.validators';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { BirthDateValidators } from '../validators/birthdate.validators';
+import { PhoneValidators } from '../validators/phone.validators';
 
 @Component({
   selector: 'sign-up',
@@ -19,9 +20,11 @@ export class SignUpComponent {
     "Egypt": ["Cairo", "Alexandria", "Giza", "Sharm El Sheikh", /* ... add cities for Egypt ... */],
     "Zimbabwe": ["Harare", "Bulawayo", "Chitungwiza", /* ... add cities for Zimbabwe ... */],
   };
+  user: any = {};
+  userData = this.getUserFromLocalStorage();
 
-  constructor(private dialog:MatDialog){}
-  
+  constructor(private dialog: MatDialog) { }
+
   form = new FormGroup({
     name: new FormControl('',
       [
@@ -54,7 +57,10 @@ export class SignUpComponent {
         // PasswordValidators.matchPassword
       ]
     ),
-    phone: new FormControl(''),
+    phone: new FormControl('',
+      PhoneValidators.numericFormat,
+
+    ),
     country: new FormControl(''),
     city: new FormControl(
       { value: '', disabled: true },
@@ -66,13 +72,13 @@ export class SignUpComponent {
       Validators.required
     ),
     birthdate: new FormControl('',
-    [
-      Validators.required,
-      BirthDateValidators.notUnderAge,
-      BirthDateValidators.notOverage,
-      BirthDateValidators.notOverDate,
-      
-    ],
+      [
+        Validators.required,
+        BirthDateValidators.notUnderAge,
+        BirthDateValidators.notOverage,
+        BirthDateValidators.notOverDate,
+
+      ],
     ),
   },
     PasswordValidators.matchPassword
@@ -103,8 +109,17 @@ export class SignUpComponent {
   get militarySt() {
     return this.form.get(['militarySt']);
   }
-  get birthdate(){
+  get birthdate() {
     return this.form.get(['birthdate']);
+  }
+  get phone() {
+    return this.form.get(['phone']);
+  }
+
+  ngOnInit(): void {
+    if (this.userData) {
+      this.form.patchValue(this.userData);
+    }
   }
 
   changeCountry() {
@@ -129,10 +144,22 @@ export class SignUpComponent {
   }
 
   submit() {
-    console.log(this.form.value)
+    this.setUserToLocalStorage();
+    this.reset();
+  }
+  setUserToLocalStorage() {
+    this.user = Object.assign(this.user, this.form.value);
+    localStorage.setItem('user', JSON.stringify(this.user));
+  }
+  getUserFromLocalStorage() {
+    const userString = localStorage.getItem('user');
+    if (userString) {
+      return JSON.parse(userString);
+    }
+    return null;
   }
 
-   reset() {
+  reset() {
     this.form.reset({
       name: '',
       email: '',
@@ -147,11 +174,12 @@ export class SignUpComponent {
     });
   }
 
-  openDialog(){
-    this.dialog.open(ConfirmationDialogComponent,{
-      data:{
-        form:this.form,
+  openDialog() {
+    this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        form: this.form,
       }
     });
   }
 }
+

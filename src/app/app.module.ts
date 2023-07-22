@@ -39,7 +39,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatNativeDateModule,
     MatSelectModule,
     MatRadioModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

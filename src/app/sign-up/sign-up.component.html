@@ -93,8 +93,11 @@
         <input type="text"> -->
         <mat-form-field>
             <mat-label>Phone number</mat-label>
-            <input formControlName="phone" matInput type="text">
+            <input formControlName="phone" matInput type="text" phoneNumberMask>
         </mat-form-field>
+        <div *ngIf="phone?.touched && phone?.invalid" class="alert alert-danger">
+            <div *ngIf="phone?.errors?.['numericFormat']">Phone number should be only numeric</div>
+        </div>
     </div>
     <div>
         <!-- <label for="">Country</label>
@@ -130,7 +133,7 @@
     <div>
         <mat-form-field>
             <mat-label>Birthdate</mat-label>
-            <input matInput [matDatepicker]="picker">
+            <input formControlName="birthdate"  matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -183,9 +186,9 @@
     <br>
     <!-- <button (click)="openDialog()" [disabled]="form.invalid">Submit</button> -->
     <!-- <button (click)="reset()">Reset</button> -->
-    <button mat-raised-button color="primary" (click)="openDialog()" [disabled]="form.invalid">Submit</button>
+    <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid">Submit</button>
     <button mat-raised-button color="warn" (click)="reset()">Reset</button>
 
     <br>
-    <!-- {{form.value|json}} -->
+    {{form.value|json}}
 </form>
