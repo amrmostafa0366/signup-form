@@ -44,7 +44,8 @@ export class SignUpComponent {
         Validators.maxLength(15),
         PasswordValidators.containSpecialCharacter,
         PasswordValidators.containUpperCase,
-        PasswordValidators.containNumber
+        PasswordValidators.containNumber,
+        PasswordValidators.noSpaces
       ]
     ),
     confirmPw: new FormControl('',

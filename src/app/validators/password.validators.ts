@@ -33,4 +33,9 @@ export class PasswordValidators {
         }
         return null;
     }
+    static noSpaces(control: AbstractControl): ValidationErrors | null {
+        if (control.value.match(' ')) {
+            return ({ noSpaces: true });
+        } return null;
+    }
 }

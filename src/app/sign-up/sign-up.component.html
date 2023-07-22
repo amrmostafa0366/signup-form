@@ -35,13 +35,43 @@
             <mat-label>Password</mat-label>
             <input formControlName="password" matInput type="text">
         </mat-form-field>
-        <div *ngIf="password?.touched && password?.invalid" class="alert alert-danger">
-            <div *ngIf="password?.errors?.['required']">Password is required</div>
-            <div *ngIf="password?.errors?.['minlength']">Password should be at least 8 characters</div>
-            <div *ngIf="password?.errors?.['maxlength']">Password should be at most 15 characters</div>
-            <div *ngIf="password?.errors?.['containUpperCase']">Password should contains upper case</div>
-            <div *ngIf="password?.errors?.['containSpecialCharacter']">Password should contains special character</div>
-            <div *ngIf="password?.errors?.['containNumber']">Password should contains numbers</div>
+        <div *ngIf="password?.touched && password?.invalid">
+            <div *ngIf="password?.errors?.['required']" id="error">Password is required</div>
+
+            <div *ngIf="password?.errors?.['minlength']; then invalidMin else validMin"></div>
+            <ng-template #invalidMin>
+                <div id="error">Password should be at least 8 characters</div>
+            </ng-template>
+            <ng-template #validMin>
+                <div *ngIf="password?.value !==''" id="valid">Password should be at least 8 characters ✔</div>
+            </ng-template>
+
+            <div *ngIf="password?.errors?.['maxlength']" id="error">Password should be at most 15 characters</div>
+
+            <div *ngIf="password?.errors?.['containUpperCase'] then invalidUpper else validUpper"></div>
+            <ng-template #invalidUpper>
+                <div id="error">Password should contains upper case</div>
+            </ng-template>
+            <ng-template #validUpper>
+                <div *ngIf="password?.value !==''" id="valid">Password should contains upper case ✔</div>
+            </ng-template>
+
+            <div *ngIf="password?.errors?.['containSpecialCharacter'] then invalidSpec else validSpec"></div>
+            <ng-template #invalidSpec>
+                <div id="error">Password should contains special character</div>
+            </ng-template>
+            <ng-template #validSpec>
+                <div *ngIf="password?.value !==''" id="valid">Password should contains special character ✔</div>
+            </ng-template>
+
+            <div *ngIf="password?.errors?.['containNumber']then invalidNum else validNum"></div>
+            <ng-template #invalidNum>
+                <div id="error">Password should contain numbers</div>
+            </ng-template>
+            <ng-template #validNum>
+                <div *ngIf="password?.value !==''" id="valid">Password should contain numbers ✔</div>
+            </ng-template>
+            <div *ngIf="password?.errors?.['noSpaces']" id="error">Password can't contain spaces</div>
         </div>
     </div>
     <div>
@@ -52,9 +82,9 @@
             <mat-label>Confirm Password</mat-label>
             <input formControlName="confirmPw" matInput type="text">
         </mat-form-field>
-        <div *ngIf="confirmPw?.touched && confirmPw?.invalid" class="alert alert-danger">
-            <div *ngIf="confirmPw?.errors?.['required']">Password is required</div>
-            <div *ngIf="confirmPw?.errors?.['matchPassword']">Passwords didn't match</div>
+        <div *ngIf="confirmPw?.touched  && form?.errors?.['matchPassword']" class="alert alert-danger">
+            <!-- <div *ngIf="confirmPw?.errors?.['required']">Password is required</div> -->
+            <div *ngIf="form?.errors?.['matchPassword']">Passwords didn't match</div>
         </div>
     </div>
     <div>
@@ -159,6 +189,3 @@
     <br>
     <!-- {{form.value|json}} -->
 </form>
-
-
-

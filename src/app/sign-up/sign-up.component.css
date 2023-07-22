@@ -1,0 +1,8 @@
+#error{
+    color: red;
+    font-weight: bold;
+}
+#valid{
+    color: green;
+    font-weight: bold;
+}
