@@ -143,10 +143,10 @@ export class SignUpComponent {
     }
   }
 
-  submit() {
-    this.setUserToLocalStorage();
-    this.reset();
-  }
+  // submit() {
+  //   this.setUserToLocalStorage();
+  //   this.reset();
+  // }
   setUserToLocalStorage() {
     this.user = Object.assign(this.user, this.form.value);
     localStorage.setItem('user', JSON.stringify(this.user));
@@ -175,6 +175,7 @@ export class SignUpComponent {
   }
 
   openDialog() {
+    this.setUserToLocalStorage();
     this.dialog.open(ConfirmationDialogComponent, {
       data: {
         form: this.form,
@@ -182,4 +183,3 @@ export class SignUpComponent {
     });
   }
 }
-
