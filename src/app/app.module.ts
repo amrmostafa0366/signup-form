@@ -17,8 +17,21 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import { NameComponent } from './name/name.component';
+import { BirthdateComponent } from './birthdate/birthdate.component';
+import { PasswordComponent } from './password/password.component';
+import { CountryPhoneComponent } from './country-phone/country-phone.component';
+import { RouterModule, Routes } from '@angular/router';
 
 
+const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'name' },
+  { path: 'name', component: NameComponent },
+  { path: 'birthdate', component: BirthdateComponent },
+  { path: 'country', component: CountryPhoneComponent },
+  { path: 'password', component: PasswordComponent },
+  { path: 'sign-up', component: SignUpComponent },
+];
 
 @NgModule({
   declarations: [
@@ -26,6 +39,10 @@ import {MatCardModule} from '@angular/material/card';
     SignUpComponent,
     PhoneNumberDirective,
     ConfirmationDialogComponent,
+    NameComponent,
+    BirthdateComponent,
+    PasswordComponent,
+    CountryPhoneComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,8 +59,10 @@ import {MatCardModule} from '@angular/material/card';
     MatRadioModule,
     MatButtonModule,
     MatCardModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [RouterModule],
 })
 export class AppModule { }

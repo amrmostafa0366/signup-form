@@ -1,0 +1,41 @@
+<form [formGroup]="countryForm">
+    <div>
+        <mat-form-field>
+            <mat-label>Country</mat-label>
+            <mat-select formControlName="country">
+                <mat-option value=""></mat-option>
+                <mat-option *ngFor="let country of countryList" [value]="country">{{country}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+            <mat-label>City</mat-label>
+            <mat-select formControlName="city">
+                <mat-option value=""></mat-option>
+                <mat-option *ngFor="let city of changeCountry()" [value]="city">{{city}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div *ngIf="city?.touched && city?.invalid " class="alert alert-danger">
+            <div *ngIf="city?.errors?.['required']">City is required</div>
+        </div>
+    </div>
+    <div>
+        <mat-form-field>
+            <mat-label> Phone number</mat-label>
+            <input formControlName="phone" matInput type="text">
+        </mat-form-field>
+        <div *ngIf="phone?.touched && phone?.invalid" class="alert alert-danger">
+            <div *ngIf="phone?.errors?.['numericFormat']">Phone number should be only numeric</div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <button type="button" mat-raised-button color="primary" (click)="back()">Back</button>
+        </div>
+        <div>
+            <button type="button" mat-raised-button color="primary" (click)="next()" [disabled]="countryForm.invalid">Next</button>
+        </div>
+    </div>
+    <p>{{countryForm.value|json}}</p>
+</form>

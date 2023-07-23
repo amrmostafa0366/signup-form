@@ -118,8 +118,20 @@ export class SignUpComponent {
 
   ngOnInit(): void {
     if (this.userData) {
-      this.form.patchValue(this.userData);
+      this.form.patchValue({
+        name: this.userData.userName.firstName,
+        email: this.userData.userName.email,
+        password: this.userData.userPassword.password,
+        confirmPw: this.userData.userPassword.confirmPw,
+        phone: this.userData.userCountry.phone,
+        country: this.userData.userCountry.country,
+        city: this.userData.userCountry.city,
+        birthdate: this.userData.userBirth.birthdate,
+        gender: this.userData.userBirth.gender,
+        militarySt: this.userData.userBirth.militarySt,
+      });
     }
+    console.log(this.userData);
   }
 
   changeCountry() {
@@ -143,18 +155,25 @@ export class SignUpComponent {
     }
   }
 
-  // submit() {
-  //   this.setUserToLocalStorage();
-  //   this.reset();
+
+  // setUserToLocalStorage() {
+  //   this.user = Object.assign(this.user, this.form.value);
+  //   localStorage.setItem('user', JSON.stringify(this.user));
   // }
-  setUserToLocalStorage() {
-    this.user = Object.assign(this.user, this.form.value);
-    localStorage.setItem('user', JSON.stringify(this.user));
-  }
+
   getUserFromLocalStorage() {
-    const userString = localStorage.getItem('user');
-    if (userString) {
-      return JSON.parse(userString);
+    const userName = localStorage.getItem('userName');
+    const userBirth = localStorage.getItem('userBirth');
+    const userCountry = localStorage.getItem('userCountry');
+    const userPassword = localStorage.getItem('userPassword');
+    if (userName && userBirth && userCountry && userPassword) {
+      const userData = {
+        userName: JSON.parse(userName),
+        userBirth: JSON.parse(userBirth),
+        userCountry: JSON.parse(userCountry),
+        userPassword: JSON.parse(userPassword),
+      };
+      return userData;
     }
     return null;
   }
@@ -175,7 +194,7 @@ export class SignUpComponent {
   }
 
   openDialog() {
-    this.setUserToLocalStorage();
+    // this.setUserToLocalStorage();
     this.dialog.open(ConfirmationDialogComponent, {
       data: {
         form: this.form,

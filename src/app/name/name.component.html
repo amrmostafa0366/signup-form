@@ -1,0 +1,44 @@
+<form [formGroup]="nameForm">
+    <div>
+        <div>
+            <mat-form-field>
+                <mat-label>First Name</mat-label>
+                <input formControlName="firstName" matInput type="text">
+            </mat-form-field>
+            <div *ngIf="firstName?.touched && firstName?.invalid" class="alert alert-danger">
+                <div *ngIf="firstName?.errors?.['required']">firstName is required</div>
+                <div *ngIf="firstName?.errors?.['minlength']">firstName should be at least 3 characters</div>
+                <div *ngIf="firstName?.errors?.['maxlength']">firstName should be at most 10 characters</div>
+                <div *ngIf="firstName?.errors?.['onlyAlphabet']">firstName should be only alphabet</div>
+            </div>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Last Name</mat-label>
+                <input formControlName="lastName" matInput type="text">
+            </mat-form-field>
+            <div *ngIf="lastName?.touched && lastName?.invalid" class="alert alert-danger">
+                <div *ngIf="lastName?.errors?.['required']">lastName is required</div>
+                <div *ngIf="lastName?.errors?.['minlength']">lastName should be at least 3 characters</div>
+                <div *ngIf="lastName?.errors?.['maxlength']">lastName should be at most 10 characters</div>
+                <div *ngIf="lastName?.errors?.['onlyAlphabet']">lastName should be only alphabet</div>
+            </div>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input formControlName="email" matInput type="text">
+            </mat-form-field>
+            <div *ngIf="email?.touched && email?.invalid" class="alert alert-danger">
+                <div *ngIf="email?.errors?.['required']">Email is required</div>
+                <div *ngIf="email?.errors?.['email']">Invalid email</div>
+            </div>
+        </div>
+
+
+    </div>
+    <div>
+        <button type="button" mat-raised-button color="primary" (click)="next()" [disabled]="nameForm.invalid">Next</button>
+    </div>
+</form>
