@@ -1,0 +1,42 @@
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 500px;
+  }
+  
+  .form-field {
+    flex: 0 0 50%;
+    padding: 10px;
+  }
+  
+  .form-field.full-width {
+    flex-basis: 100%;
+  }
+  
+  .input-field,
+  .select-input {
+    width: 100%;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .back-btn,
+  .next-btn {
+    padding: 8px 20px;
+    margin: 0 5px;
+  }
+  

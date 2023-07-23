@@ -1,6 +1,6 @@
 <form [formGroup]="nameForm">
-    <div>
-        <div>
+    <div class="container">
+        <div class="form-field">
             <mat-form-field>
                 <mat-label>First Name</mat-label>
                 <input formControlName="firstName" matInput type="text">
@@ -12,7 +12,8 @@
                 <div *ngIf="firstName?.errors?.['onlyAlphabet']">firstName should be only alphabet</div>
             </div>
         </div>
-        <div>
+
+        <div class="form-field">
             <mat-form-field>
                 <mat-label>Last Name</mat-label>
                 <input formControlName="lastName" matInput type="text">
@@ -25,8 +26,8 @@
             </div>
         </div>
 
-        <div>
-            <mat-form-field>
+        <div class="form-field full-width">
+            <mat-form-field class="input-field">
                 <mat-label>Email</mat-label>
                 <input formControlName="email" matInput type="text">
             </mat-form-field>
@@ -36,9 +37,9 @@
             </div>
         </div>
 
-
-    </div>
-    <div>
-        <button type="button" mat-raised-button color="primary" (click)="next()" [disabled]="nameForm.invalid">Next</button>
+        <div class="next-btn">
+            <button type="button" mat-raised-button color="primary" (click)="next()"
+                [disabled]="nameForm.invalid">Next</button>
+        </div>
     </div>
 </form>
