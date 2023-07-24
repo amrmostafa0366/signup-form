@@ -1,6 +1,6 @@
 <form [formGroup]="form">
     <div class="container">
-        <div class="form-field half-width">
+        <div class="form-field">
             <mat-form-field>
                 <mat-label>Name</mat-label>
                 <input formControlName="name" matInput type="text">
@@ -12,7 +12,7 @@
                 <div *ngIf="name?.errors?.['onlyAlphabet']">Name should be only alphabet</div>
             </div>
         </div>
-        <div class="form-field half-width">
+        <div class="form-field">
             <!-- <label>Email</label>
         <br>
         <input formControlName="email" type="text"> -->
@@ -25,8 +25,8 @@
                 <div *ngIf="email?.errors?.['email']">Invalid email</div>
             </div>
         </div>
-        <div class="form-field half-width">
-         
+        <div class="form-field">
+
             <mat-form-field>
                 <mat-label>Password</mat-label>
                 <input formControlName="password" matInput type="text">
@@ -70,7 +70,7 @@
                 <div *ngIf="password?.errors?.['noSpaces']" id="error">Password can't contain spaces</div>
             </div>
         </div>
-        <div class="form-field half-width">
+        <div class="form-field">
             <mat-form-field>
                 <mat-label>Confirm Password</mat-label>
                 <input formControlName="confirmPw" matInput type="text">
@@ -81,7 +81,7 @@
             </div>
         </div>
         <div class="form-field full-width">
-            <mat-form-field>
+            <mat-form-field class="input-field">
                 <mat-label> Phone number</mat-label>
                 <input formControlName="phone" matInput type="text" phoneNumberMask>
             </mat-form-field>
@@ -90,7 +90,7 @@
             </div>
         </div>
 
-        <div class="form-field half-width">
+        <div class="form-field">
             <!-- <label for="">Country</label>
         <br>
         <select formControlName="country">
@@ -105,7 +105,7 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="form-field half-width">
+        <div class="form-field">
             <mat-form-field>
                 <mat-label>City</mat-label>
                 <mat-select formControlName="city">
@@ -118,14 +118,12 @@
             </div>
         </div>
         <div class="form-field full-width">
-            <div>
-                <mat-form-field class="date-input">
-                    <mat-label>Birthdate</mat-label>
-                    <input formControlName="birthdate" matInput [matDatepicker]="picker" >
-                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker ></mat-datepicker>
-                </mat-form-field>
-            </div>
+            <mat-form-field class="input-field">
+                <mat-label>Birthdate</mat-label>
+                <input formControlName="birthdate" matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
 
             <div *ngIf="birthdate?.touched && birthdate?.invalid" class="alert alert-danger">
                 <div *ngIf="birthdate?.errors?.['required']">Birthdate is required</div>
@@ -151,7 +149,7 @@
             </div>
         </div>
 
-        <div class="form-field half-width">
+        <div class="form-field">
             <mat-form-field>
                 <mat-label>Military status</mat-label>
                 <mat-select formControlName="militarySt">
